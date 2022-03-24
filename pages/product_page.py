@@ -29,12 +29,25 @@ class ProductPage(BasePage):
 
     def should_be_correct_product_name(self, product_name):
         # проверка на совпадение имени товара в корзине
-        # print('--', product_name)
+        # print('---', product_name)
         assert product_name == self.is_element_present(*ProductPageLocators.BASKET_PRODUCT_NAME, returned=1), \
             "The product name is not matches with the product name in the basket"
 
     def should_be_correct_price(self, price):
-        # print('--', price)
+        # print('---', price)
         # стоимость корзины совпадает со стоимостью товара
         assert price == self.is_element_present(*ProductPageLocators.BASKET_PRICE, returned=1), \
             "The price is not matches with the price in the basket"
+
+    def should_not_be_success_message(self):
+        # проверка на отсутствие сообщения об успехе
+        # print("нет сообщений проверка")
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def should_disappear_success_message(self):
+        # сообщения должны исчезать
+        # print("сообщения исчезают проверка")
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message should disappear"
+
